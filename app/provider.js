@@ -15,11 +15,11 @@ import { api } from "../convex/_generated/api";
 function Provider({children}) {
     const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
     const [user, setUser] = useState();
-    const createUser = useMutation(api.user.CreateNewUser);
+    const createUser = useMutation(api.users.CreateNewUser);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (user) { 
+          
                 setUser(user);
                 try {
                     await createUser({
@@ -32,7 +32,7 @@ function Provider({children}) {
                   }
 
                 
-                    }
+                    
             })
             return () => unsubscribe();
         }, [])
